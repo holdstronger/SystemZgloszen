@@ -1,0 +1,19 @@
+﻿@model Zgloszenie
+<h1>Szczegóły Zgłoszenia</h1>
+<p><strong>Tytuł:</strong> @Model.Tytul</p>
+<p><strong>Opis:</strong> @Model.Opis</p>
+<p><strong>Priorytet:</strong> @Model.Priorytet</p>
+<p><strong>Status:</strong> @Model.Status</p>
+<p><strong>Data Zgłoszenia:</strong> @Model.DataZgloszenia.ToString("g")</p>
+
+<h2>Komentarze:</h2>
+<ul>
+    @foreach (var komentarz in Model.Komentarze)
+    {
+        <li>
+            <strong>@komentarz.Uzytkownik.Imie:</strong> @komentarz.Tresc
+            <em>(dodano: @komentarz.DataDodania.ToString("g"))</em>
+        </li>
+    }
+</ul>
+<a href="/Zgloszenia">Wróć do listy zgłoszeń</a>

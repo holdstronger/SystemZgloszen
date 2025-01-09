@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Zgłoszeń</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Dodaj Zgłoszenie</h1>
+        <form id="bug-form">
+            <input type="text" id="tytul" placeholder="Tytuł zgłoszenia" required />
+            <textarea id="opis" placeholder="Opis błędu" required></textarea>
+            <select id="priorytet">
+                <option value="Niski">Niski</option>
+                <option value="Średni">Średni</option>
+                <option value="Wysoki">Wysoki</option>
+            </select>
+            <button type="submit">Wyślij</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("bug-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const tytul = document.getElementById("tytul").value;
+            const opis = document.getElementById("opis").value;
+            const priorytet = document.getElementById("priorytet").value;
+
+            const response = await fetch('http://localhost:5000/api/zgloszenia', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tytul, opis, priorytet, status: "Nowe" })
+            });
+
+            if (response.ok) {
+                alert("Zgłoszenie dodane!");
+                document.getElementById("bug-form").reset();
+            } else {
+                alert("Błąd podczas dodawania zgłoszenia.");
+            }
+        });
+    </script>
+</body>
+</html>

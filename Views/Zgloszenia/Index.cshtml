@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Zgloszenie>
+<h1>Lista Zgłoszeń</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Priorytet</th>
+            <th>Status</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zgloszenie in Model)
+        {
+            <tr>
+                <td>@zgloszenie.Tytul</td>
+                <td>@zgloszenie.Priorytet</td>
+                <td>@zgloszenie.Status</td>
+                <td>
+                    <a href="/Zgloszenia/Details/@zgloszenie.Id">Szczegóły</a>
+                    <a href="/Zgloszenia/Edit/@zgloszenie.Id">Edytuj</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
